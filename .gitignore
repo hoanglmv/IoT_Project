@@ -1,0 +1,53 @@
+# =========================
+# Mac OS X
+# =========================
+.DS_Store
+
+# =========================
+# Arduino / PlatformIO
+# =========================
+# Arduino Build
+build/
+*.elf
+*.bin
+*.map
+*.hex
+*.part
+*.o
+*.a
+*.ino.cpp
+*.ino.bin
+*.ino.elf
+*.ino.map
+*.ino.hex
+
+# PlatformIO Environment
+.pio/
+.pioenvs/
+.piolibdeps/
+*.d
+*.gcc*
+
+# =========================
+# IDE specific
+# =========================
+# VSCode
+.vscode/
+
+# IntelliJ / CLion / IDEA
+.idea/
+*.iml
+
+# =========================
+# Secrets / Configs
+# =========================
+# Ignore actual config to prevent leaking API keys
+config/config.h
+
+# =========================
+# Temporary files
+# =========================
+*.swp
+*~
+*.bak
+*.tmp
