@@ -51,3 +51,5 @@ config/config.h
 *~
 *.bak
 *.tmp
+backend/.env
+backend/database.sqlite
