@@ -2,9 +2,9 @@
 #include <WiFi.h>
 #include <WiFiClientSecure.h>
 #include "config.h"
-#include "audio_in.h"
-#include "audio_out.h"
-#include "openai_client.h"
+#include "audio_in/audio_in.h"
+#include "audio_out/audio_out.h"
+#include "openai_client/openai_client.h"
 
 enum SystemState {
   STATE_IDLE,

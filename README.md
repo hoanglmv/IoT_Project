@@ -13,9 +13,12 @@ Dự án Trợ lý Ảo bằng Giọng nói sử dụng module ESP32-S3, giao ti
 IoT_Project/
 ├── src/                  # Mã nguồn chính
 │   ├── main.cpp          # File thực thi chính
-│   ├── audio_in.cpp/.h   # Module điều khiển mic
-│   ├── audio_out.cpp/.h  # Module điều khiển loa
-│   └── openai_client.cpp/.h # Module kết nối mạng OpenAI
+│   ├── audio_in/         # Module điều khiển mic
+│   │   └── audio_in.cpp/.h   
+│   ├── audio_out/        # Module điều khiển loa
+│   │   └── audio_out.cpp/.h  
+│   └── openai_client/    # Module kết nối mạng OpenAI
+│       └── openai_client.cpp/.h 
 ├── config/               # Chứa các file cấu hình
 │   └── config.example.h  # Template thông tin mạng và API keys
 ├── platformio.ini        # Cấu hình cho PlatformIO
