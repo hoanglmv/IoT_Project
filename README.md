@@ -8,38 +8,43 @@ Dự án Trợ lý Ảo bằng Giọng nói sử dụng module ESP32-S3, giao ti
 - Lấy câu trả lời LLM từ API Chat Completions
 - Phát âm thanh phản hồi qua Amply I2S (MAX98357A)
 
-## Cấu trúc thư mục chuyên nghiệp
+## Cấu trúc Hệ thống
 ```text
 IoT_Project/
-├── src/                  # Mã nguồn chính
-│   ├── main.cpp          # File thực thi chính
-│   ├── audio_in/         # Module điều khiển mic
-│   │   └── audio_in.cpp/.h   
-│   ├── audio_out/        # Module điều khiển loa
-│   │   └── audio_out.cpp/.h  
-│   └── openai_client/    # Module kết nối mạng OpenAI
-│       └── openai_client.cpp/.h 
-├── config/               # Chứa các file cấu hình
-│   └── config.example.h  # Template thông tin mạng và API keys
-├── platformio.ini        # Cấu hình cho PlatformIO
-├── README.md                 # Tài liệu này
-└── .gitignore                # File Git ẩn các cache build và config bảo mật
+├── src/                  # Mã nguồn ESP32 (C++)
+├── config/               # Cấu hình chứa IP Server và Mạng cho ESP32
+├── backend/              # Node.js Express Server (Nhận Âm thanh -> Gọi OpenAI -> Trả MP3)
+│   ├── server.js         
+│   ├── db.js             # SQLite3 xử lý lịch sử Chat
+│   └── .env.example      # Nơi nhập OPENAI_API_KEY
+├── frontend/             # React Dashboard (Theo dõi lịch sử và cấu hình Agent)
+│   └── src/App.js        
+├── platformio.ini        
+└── README.md                 
 ```
 
-## Hướng dẫn cài đặt
+## Hướng dẫn Vận hành toàn hệ thống
 
-### Bước 1: Chuẩn bị thông tin cấu hình
-Vào thư mục `config/`, đổi tên file `config.example.h` thành `config.h`. (File `config.h` đã được đưa vào list `.gitignore` để tránh bị lộ API key khi đẩy lên GitHub).
-Sau đó vào file `config.h` thay đổi SSID WiFi, Mật khẩu, và OpenAI API Key.
+### 1. Khởi động Web Backend (Node.js)
+Backend đóng vai trò làm Proxy ẩn API Key và ghi log lịch sử hội thoại lên Database.
+1. Mở Terminal, di chuyển vào thư mục `backend/`
+2. Đổi tên `backend/.env.example` thành `.env`, mở lên và điền `OPENAI_API_KEY` của bạn.
+3. Chạy `npm install` để tải gói phụ thuộc.
+4. Chạy `npm start`. (Server sẽ khởi động ở cổng `3000`).
+5. **Quan trọng:** Tìm địa chỉ IP máy tính trong mạng Local (ví dụ: `192.168.1.100`), IP này cần được nạp vào khai báo cấu hình ESP32.
 
-### Bước 2: Setup Môi trường
-Với cấu trúc thư mục mới (`src/` và `config/`), dự án được thiết kế chuyên biệt để chạy chạy trên **PlatformIO**.
+### 2. Khởi động Web Frontend (React Dashboard)
+1. Mở Terminal khác, chuyển vào thư mục `frontend/`
+2. Chạy `npm install`
+3. Chạy `npm start`
+4. Truy cập `http://localhost:3001` trên trình duyệt để mở bảng Dashboard quản lý Voice AI theo thời gian thực.
+5. *(Khuyên dùng)*: Mở icon Settings góc trên phải để nhập *System Prompt* (Định hình tính cách cho trợ lý).
 
-#### Sử dụng PlatformIO (Khuyến nghị)
-1. Cài đặt extension PlatformIO trong VSCode.
-2. Mở thư mục gốc `IoT_Project` bằng VSCode.
-3. PlatformIO sẽ tự động tải thư viện cần thiết dựa trên file `platformio.ini`.
-4. Nhấn Build & Upload.
+### 3. Cập nhật và Nạp Firmware lên ESP32
+1. Vào thư mục `config/`, đổi tên `config.example.h` thành `config.h`. 
+2. Thay đổi thông tin mạng WiFi. Tại mục `BACKEND_IP`, **thay thế bằng địa chỉ IP máy tính** của bạn (đã lấy ở bước 1).
+3. Mở mã nguồn `IoT_Project` bằng **PlatformIO** (VSCode).
+4. Nhấn Build & Upload để nạp Firmware mới xuống module.
 
 ## Lối thiết kế phần cứng (Pinout)
 - **INMP441 (Micro)**: SCK (GPIO14), WS (GPIO4), SD (GPIO1)

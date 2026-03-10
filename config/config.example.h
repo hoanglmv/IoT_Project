@@ -8,13 +8,12 @@
 #define WIFI_PASSWORD   "YOUR_WIFI_PASSWORD"
 
 // ==========================================
-// OpenAI API Configuration
+// Setup: Your Web Backend Details
 // ==========================================
-#define OPENAI_API_KEY  "sk-proj-YOUR_OPENAI_API_KEY_HERE"
-
-// ==========================================
-// Audio Sampling Parameters
-// ==========================================
+// IMPORTANT: Replace this IP with the computer running your Node.js backend
+// Find local IP using `ipconfig` (Windows) or `ifconfig` (Linux/Mac)
+#define BACKEND_IP      "192.168.1.100" // Example: "192.168.x.x"
+#define BACKEND_PORT    "3000"
 #define SAMPLE_RATE     16000
 #define NUM_CHANNELS    1
 #define BITS_PER_SAMPLE 16
