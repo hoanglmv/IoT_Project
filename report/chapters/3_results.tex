@@ -1,0 +1,20 @@
+\section{KẾT QUẢ}
+Trong phần này, chúng tôi thực hiện phân tích và kiểm chứng ba kịch bản hoạt động chính của hệ thống, tương ứng với thuật toán điều khiển đã được lập trình. Mỗi trường hợp đại diện cho một trạng thái an toàn nhất định của môi trường xung quanh.
+
+\subsection{Kịch bản trạng thái bình thường}
+Khi nhiệt độ $t \le 20^\circ\text{C}$, nồng độ gas $\le 500$, và không có ngọn lửa, hệ thống vận hành ở trạng thái chờ. Cụ thể: còi báo động duy trì mức cao (tắt), cửa sổ đóng kín (góc quay servo bằng $0^\circ$), quạt hút ngừng hoạt động, và đèn báo LED hiển thị màu Xanh lá. Dữ liệu trạng thái này liên tục gửi thông điệp báo hiệu hệ thống đang hoạt động ổn định.
+
+\subsection{Kịch bản rò rỉ khí Gas (Cảnh báo mức 2)}
+Nếu dữ liệu đọc về thỏa mãn $gasValue > 500$ nhưng các chỉ số khác an toàn (chưa có lửa và nhiệt độ chưa cao). Hệ thống đánh giá đây là nguy cơ ngạt khí hoặc cháy tiềm ẩn.  
+Hệ thống ưu tiên bật quạt hút thông qua Relay và điều khiển Servo quay $90^\circ$ mở toàn bộ cửa sổ để đưa khí ra ngoài. Còi báo động được kích hoạt (mức thấp). Trạng thái thị giác chuyển đèn LED sang màu Vàng. Dữ liệu cảnh báo "Đang hút khí Gas độc ra ngoài" được in ra.
+
+\subsection{Kịch bản hỏa hoạn và rò rỉ (Cảnh báo mức 1)}
+Đây là tình huống khẩn cấp nhất, điều kiện xảy ra khi cả 3 tín hiệu cảnh báo đồng thời xuất hiện (vượt mức Gas, vượt nhiệt độ và có ngọn lửa). Hệ thống lập tức kích hoạt phản ứng đa hướng:
+\begin{itemize}
+    \item Bật còi báo động (BUZZER = LOW).
+    \item Động cơ Servo quay vị trí $0^\circ$ đóng kín cửa sổ để ngăn cung cấp thêm oxy cho ngọn lửa.
+    \item Relay kích mức thấp, tắt quạt thông gió để tránh thổi bùng đám cháy.
+    \item Đèn báo LED chuyển sang màu Đỏ, biểu thị trạng thái đặc biệt nguy hiểm.
+\end{itemize}
+
+Kết quả thu thập tại cổng Serial cho thấy thời gian đáp ứng giữa việc phát hiện bất thường và ra quyết định chỉ mất vài mili-giây, giúp tăng cường hiệu năng cảnh báo cho toàn mạng thứ cấp (hệ thống nhà thông minh).

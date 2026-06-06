@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  web-dashboard:
+    build:
+      context: ./web-dashboard
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    restart: always

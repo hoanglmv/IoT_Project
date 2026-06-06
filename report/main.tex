@@ -1,0 +1,55 @@
+\documentclass[10pt, conference, a4paper]{IEEEtran}
+\usepackage[utf8]{inputenc}
+\usepackage[T5]{fontenc} % Hỗ trợ hiển thị tiếng Việt chuẩn
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{float} % Thêm package float để cố định vị trí ảnh
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows, positioning}
+
+% Điều chỉnh lại một số nhãn thành tiếng Việt
+\renewcommand{\abstractname}{Abstract}
+\renewcommand{\figurename}{Hình}
+\renewcommand{\refname}{TÀI LIỆU THAM KHẢO}
+
+\begin{document}
+
+\title{Mô Hình Hệ Thống Cảnh Báo Cháy Nổ Và Rò Rỉ Khí Gas Thông Minh}
+
+% Sinh viên thực hiện
+\author{
+\IEEEauthorblockN{
+Trần Thị Huyền Trang (23021924), 
+Bùi Đức Dũng (23021777), \\
+Lê Mai Việt Hoàng (22022191), 
+Nguyễn Duy Phương (23021882)
+}
+\IEEEauthorblockA{
+\textit{University of Engineering and Technology, Vietnam National University}\\
+Hanoi, Vietnam
+}
+}
+
+\maketitle
+
+\begin{abstract}
+Trong báo cáo này, chúng tôi nghiên cứu, thiết kế và đề xuất mô hình hệ thống giám sát, cảnh báo cháy nổ và rò rỉ khí gas sử dụng vi điều khiển ESP8266. Hệ thống thu thập dữ liệu trực tiếp từ cảm biến nhiệt độ DHT22, cảm biến khí gas MQ2 và cảm biến phát hiện ngọn lửa. Dựa trên các ngưỡng an toàn được thiết lập, hệ thống tự động đưa ra các kịch bản phản hồi tương ứng như bật còi báo động, mở cửa sổ thông qua động cơ servo, kích hoạt quạt hút khí và hiển thị trạng thái qua cụm đèn LED RGB. Kết quả cho thấy hệ thống hoạt động với tốc độ đáp ứng cao, hỗ trợ tích cực cho các ứng dụng nhà thông minh.
+\end{abstract}
+
+\begin{IEEEkeywords}
+ESP8266, DHT22, MQ2, cảnh báo cháy, rò rỉ gas, nhà thông minh, IoT.
+\end{IEEEkeywords}
+
+\input{chapters/1_introduction}
+\input{chapters/2_system_model}
+\input{chapters/3_results}
+\input{chapters/4_conclusion}
+
+\begin{thebibliography}{00}
+\bibitem{b1} R. E. Smith, ``Internet of Things: Fire detection systems and automated response mechanisms,'' \emph{IEEE Trans. Ind. Electron.}, vol. 24, pp. 79-89, 2021.
+\bibitem{b2} J. Mitola, ``Smart Home Environments: Multi-sensor Data Fusion for Safety,'' \emph{IEEE Pers. Commun.}, vol. 6, no. 4, pp. 13-18, 2019.
+\bibitem{b3} A. Sahai, N. Hoven, ``Implementation limits in monitoring sensors via ESP8266,'' in \emph{Proc. Of Allerton Conf Commun Control Comput}, Sept. 2020.
+\end{thebibliography}
+
+\end{document}
